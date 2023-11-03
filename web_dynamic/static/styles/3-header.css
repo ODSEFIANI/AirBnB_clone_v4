@@ -10,12 +10,13 @@ header .logo {
     height: 100%;
 }
 header #api_status {
-    align-self: center;
+    float: right;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: 100%;
     margin-right: 30px;
-    background-color: #CCCCCC;
+	margin-top: 15px;
+    background-color: #cccccc;
 }
 header .available {
     background-color: #ff545f;
