@@ -36,6 +36,9 @@ button:hover {
     font-weight: 600;
 }
 .filters h4 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin-left: 15%;
     margin-top: 0;
     font-weight: 400;
