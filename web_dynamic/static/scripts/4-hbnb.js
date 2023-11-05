@@ -16,6 +16,15 @@ $(document).ready(function () {
       }
       $('.amenities h4').text(amenities_names.join(', '));
     });
+
+    function BuildArticles (data) {
+        console.log(data);
+        $('.places').empty();
+        for (let i = 0; i < data.length; ++i) {
+        let html = '<article><div class="title"><h2>' + data[i].name + '</h2><div class="price_by_night">' + data[i].price_by_night + '</div></div><div class="information"><div class="max_guest"><i class="fa fa-users fa-3x" aria-hidden="true"></i><br />' + data[i].max_guest + ' Guests</div><div class="number_rooms"><i class="fa fa-bed fa-3x" aria-hidden="true"></i><br />' + data[i].number_rooms + ' Bedrooms</div><div class="number_bathrooms"><i class="fa fa-bath fa-3x" aria-hidden="true"></i><br />' + data[i].number_bathrooms + ' Bathroom</div></div><div class="user"></div><div class="description">' + data[i].description + '</div></article>';
+        $('.places').append(html);
+        }
+    }
   
     const url = 'http://0.0.0.0:5001/api/v1/status/';
     $.get(url, function (data, textStatus, jqXHR) {
@@ -32,13 +41,7 @@ $(document).ready(function () {
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify({}),
-        success: function (data) {
-            console.log(data);
-            for (let i = 0; i < data.length; ++i) {
-            let html = '<article><div class="title"><h2>' + data[i].name + '</h2><div class="price_by_night">' + data[i].price_by_night + '</div></div><div class="information"><div class="max_guest"><i class="fa fa-users fa-3x" aria-hidden="true"></i><br />' + data[i].max_guest + ' Guests</div><div class="number_rooms"><i class="fa fa-bed fa-3x" aria-hidden="true"></i><br />' + data[i].number_rooms + ' Bedrooms</div><div class="number_bathrooms"><i class="fa fa-bath fa-3x" aria-hidden="true"></i><br />' + data[i].number_bathrooms + ' Bathroom</div></div><div class="user"></div><div class="description">' + data[i].description + '</div></article>';
-            $('.places').append(html);
-            }
-        },
+        success: BuildArticles,
         error: function (jqXHR, textStatus, errorThrown) {
           console.log(jqXHR);
           console.log(textStatus);
@@ -56,14 +59,7 @@ $(document).ready(function () {
             dataType: 'json',
             contentType: 'application/json',
             data: JSON.stringify(postData),
-            success: function (data) {
-                // Clear existing places and add new filtered places
-                $('.places').empty();
-                for (let i = 0; i < data.length; ++i) {
-                    // Create and append the HTML for filtered places
-                    // (similar to what you did in the existing code)
-                }
-            },
+            success: BuildArticles,
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR);
                 console.log(textStatus);
